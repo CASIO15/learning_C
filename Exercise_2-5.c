@@ -20,7 +20,7 @@ int any(const char s1[], const char s2[])
     while (s1[i] != '\0') {
         if (s1[i] == s2[j]) {
             return i;
-        } else if (s1[i] != s2[j]) {
+        } else {
             if (s2[j] == '\0') {
                 j = 0;
                 i++;

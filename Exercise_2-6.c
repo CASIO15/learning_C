@@ -15,18 +15,39 @@ unsigned setbits(int x, int p, int n, int y);
 
 int main()
 {
-    unsigned int x = 0b11111111;
-    unsigned int y = 0b00001010;
-    
-    printf(BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(setbits(x, 5, 7, y)));
+    unsigned int x = 0b00001010;
+    unsigned int y = 0b10011001;
+
+    printf(BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(setbits(x, 0, 4, y)));
     return 0;
 }
 
 unsigned setbits(int x, int p, int n, int y)
 {
+    p++;
     unsigned int mask_x, mask_y;
-    mask_x = x >> (7-n) & x << (p-1);
-    mask_y = y << (p-1);
+    mask_y = (~(~0 << n) & y) << (p-1);
+    mask_x = (~(~0 << (p-1)) & x);
 
-    return ~mask_x | mask_y;
+    return mask_x | mask_y;
 }
+
+/*
+ x = 0b00001010 |10|
+ y = 0b10011001 |153|
+ -------------------------
+ correct result = 00100110
+ -------------------------
+ 
+ mask_x = 00000010
+ mask_y = 00100100
+ 
+ -----------------
+ 
+ mask_x = 00000010
+or
+ mask_y = 00100100
+ ------------------
+ result = 00100110 |38|
+ 
+ */

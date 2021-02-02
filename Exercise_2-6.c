@@ -18,7 +18,7 @@ int main()
     unsigned int x = 0b00001010;
     unsigned int y = 0b10011001;
 
-    printf(BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(setbits(x, 0, 4, y)));
+    printf(BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(setbits(x, 2, 4, y)));
     return 0;
 }
 

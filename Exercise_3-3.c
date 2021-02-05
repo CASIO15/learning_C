@@ -12,7 +12,7 @@ int main()
     char s2[MAXSIZE];
 
     expand(s, s2);
-    printf("%s\n", s2);
+    printf("The result of |%s| is:\n%s\n", s, s2);
     return 0;
 }
 

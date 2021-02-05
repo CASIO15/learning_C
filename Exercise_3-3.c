@@ -4,7 +4,7 @@
 
 #define MAXSIZE 100
 
-void expand(char s1[], char s2[]);
+void expand(const char s1[], char s2[]);
 
 int main()
 {
@@ -16,7 +16,7 @@ int main()
     return 0;
 }
 
-void expand(char s1[], char s2[])
+void expand(const char s1[], char s2[])
 {
     int i, j, n;
 
@@ -33,4 +33,3 @@ void expand(char s1[], char s2[])
     }
     s2[n] = '\0';
 }
-

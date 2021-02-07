@@ -15,6 +15,7 @@ int main(void)
 
     itob(n, s, b);
     printf("The result for %d in base %d is: %s\n", n, b, s);
+    return 0;
 }
 
 void reverse(char s[])

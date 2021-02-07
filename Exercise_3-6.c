@@ -40,7 +40,7 @@ void itoa(char s[], int n, int padding)
         }
 
     sign = (s[j] == '-') ? -1 : 1;
-    (sign < 0) ? j++ : i;
+    (sign < 0) ? j++ : j;
 
     do {
          s[j++] = n % 10  + '0';

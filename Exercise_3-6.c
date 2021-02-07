@@ -5,8 +5,6 @@
 void itoa(char s[], int n, int padding);
 void reverse(char s[], int pad);
 
-
-
 int main(void)
 {
     char s[1000];

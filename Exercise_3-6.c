@@ -1,16 +1,19 @@
 #include <stdio.h>
 #include <ctype.h>
+#include <stdlib.h>
 #include <string.h>
 
-void itoa(char s[], int n, int padding);
+void my_itoa(char s[], int n, int padding);
 void reverse(char s[], int pad);
+
+
 
 int main(void)
 {
     char s[1000];
-    int n = 1250;
+    int n = -1250;
     int pad = 15;
-    itoa(s, n, pad);
+    my_itoa(s, n, pad);
 
     printf("%s\n", s);
     return 0;
@@ -27,24 +30,26 @@ void reverse(char s[], int padding)
     }
 }
 
-void itoa(char s[], int n, int padding)
+void my_itoa(char s[], int n, int padding)
 {
     int i, sign, j;
 
     for (i=0; isspace(s[i]); i++)
         ;
 
-    for (j=i, i=padding+1; j <= padding; j++, i++) {
+    for (j=i, i=padding; j <= padding; j++, i++) {
         s[i] = s[j];
         s[j] = ' ';
         }
 
-    sign = (s[j] == '-') ? -1 : 1;
-    (sign < 0) ? j++ : j;
+    sign = (n < 0) ? -1 : 1;
 
     do {
-         s[j++] = n % 10  + '0';
-    } while ((n /= 10) > 0);
+         s[j++] = abs(n % 10) + '0';
+    } while (abs((n /= 10)) > 0);
+
+    if (sign < 0)
+        s[j++] = '-';
 
     s[j] = '\0';
     reverse(s, padding);

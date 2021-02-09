@@ -8,7 +8,7 @@ double atof(char s[]);
 
 int main(void)
 {
-    char line[MAXLINE] = "123.45e-6";
+    char line[MAXLINE] = "123.45e-5";
     printf("%g\n", atof(line));
     return 0;
 }
@@ -36,7 +36,9 @@ double atof(char s[])
     if (tolower(s[i]) == 'e'){
         s[i] = 10;
         sign_2 = (s[++i] == '-') ? -1 : 1;
-        return (sign * val / power) * pow(10, sign_2 * (s[++i] - '0'));
+        (sign_2 < 0) ? i++ : 0;
+
+        return (sign * val / power) * pow(10, sign_2 * (s[i] - '0'));
 
     } else
         return sign * val / power;

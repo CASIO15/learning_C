@@ -1,9 +1,4 @@
-/* 
-Polish calculator
-*/
-
 #include <stdio.h>
-#include <stdlib.h>
 #include <ctype.h>
 #include <math.h>
 
@@ -25,6 +20,9 @@ double pop(void);
 double atof_(char s[]);
 int getch(void);
 void ungetch(int c);
+void view_top(int sp_pos);
+void duplicate(int sp_pos);
+void swap();
 
 
 int main(void)
@@ -62,6 +60,15 @@ int main(void)
             case '\n':
                 printf("\t%.8g\n", pop());
                 break;
+            case 't': // view the top of the stack
+                view_top(sp);
+                break;
+            case 'd': // duplicate desired element in stack
+                duplicate(sp);
+                break;
+            case 's': // swap the top two elements
+                swap();
+                break;
             default:
                 printf("Error: unknown command %s \n", s);
                 break;
@@ -69,6 +76,35 @@ int main(void)
     }
     return 0;
 }
+
+void swap()
+{
+    double top, second_top;
+    
+    // popping the top two elements of the stack
+    top = pop();
+    second_top = pop();
+
+    // inserting them in reverse order
+    push(top);
+    push(second_top);
+
+}
+
+
+void duplicate(int sp_pose)
+{
+    if (sp_pose > 0)
+        push(val[--sp_pose]);
+}
+
+void view_top(int sp_pos)
+{
+    if (sp_pos > 0) {
+        printf("The top of the stack value is: %g\n", val[sp_pos - 1]);
+    }
+}
+
 
 double atof_(char s[])
 {

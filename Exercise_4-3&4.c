@@ -1,3 +1,7 @@
+/*
+    Polish calculator (1-2) * (4 + 5) == 1 2 - 4 5 + *
+*/ 
+
 #include <stdio.h>
 #include <ctype.h>
 #include <math.h>

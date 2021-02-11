@@ -69,6 +69,10 @@ int main(void)
             case 's': // swap the top two elements
                 swap();
                 break;
+            case 'c':
+                while (sp > 0) // clearing the stack by popping all the items, until stack position is 0
+                    pop();
+                break;
             default:
                 printf("Error: unknown command %s \n", s);
                 break;
@@ -80,7 +84,7 @@ int main(void)
 void swap()
 {
     double top, second_top;
-    
+
     // popping the top two elements of the stack
     top = pop();
     second_top = pop();
@@ -90,7 +94,6 @@ void swap()
     push(second_top);
 
 }
-
 
 void duplicate(int sp_pose)
 {

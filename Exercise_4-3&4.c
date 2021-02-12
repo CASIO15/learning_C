@@ -6,7 +6,10 @@
 #define NUMBER '0'
 #define MAXVAL 100
 #define BUFSIZE 100
+#define GETVAR '1'
 
+
+int var = 0;
 int sp = 0;
 double val[MAXVAL];
 char buf[BUFSIZE];
@@ -30,7 +33,7 @@ int main(void)
     int type;
     double op2;
     char s[MAXOP];
-    printf("To use |pow| write ^ after the number\nto use the |sin| function use ~ after the number\nto use |exp| write e after the number\n");
+    printf("To use |pow| write ^ after  the number\nto use the |sin| function use ~ after the number\nto use |exp| write e after the number\n");
 
     while ((type = getop(s)) != EOF) {
         switch (type) {
@@ -41,11 +44,15 @@ int main(void)
                 op2 = pop();
                 push(pow(op2, 2));
                 break;
+            case GETVAR: // when getop encounters a char, it delegates it returns GETVAR and we catch it in the switch statement, then it pushes the char value to the
+                        // stack, now we can use letters as variables
+                push((var-'0')-49);
+                break;
             case '~':
                 op2 = pop();
                 push(sin(op2));
                 break;
-            case 'e':
+            case 'E':
                 op2 = pop();
                 push(exp(op2));
                 break;
@@ -73,21 +80,21 @@ int main(void)
             case '\n':
                 printf("\t%.8g\n", pop());
                 break;
-            case 't': // view the top of the stack
+            case 'T': // view the top of the stack
                 view_top(sp);
                 break;
-            case 'd': // duplicate desired element in stack
+            case 'D': // duplicate desired element in stack
                 duplicate(sp);
                 break;
-            case 's': // swap the top two elements
+            case 'S': // swap the top two elements
                 swap();
                 break;
-            case 'c':
+            case 'C':
                 while (sp > 0) // clearing the stack by popping all the items, until stack position is 0
                     pop();
                 break;
             default:
-                printf("Error: unknown command %s \n", s);
+                printf("Unknown command %s\n", s);
                 break;
         }
     }
@@ -171,14 +178,16 @@ double pop(void)
     }
 }
 
-int getop(char s[])
-{
+int getop(char s[]) {
     int i, c, next;
 
-    while ((s[0] = c = getch()) == ' ' || c == '\t')
-        ;
+    while ((s[0] = c = getch()) == ' ' || c == '\t');
 
     s[1] = '\0';
+    if (isalpha(c) && islower(c)) {
+        var = c;
+        return GETVAR;
+    }
     if (!isdigit(c) && c != '.' && c != '-')
         return c;
 

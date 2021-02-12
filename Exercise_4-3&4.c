@@ -165,7 +165,7 @@ double pop(void)
 
 int getop(char s[])
 {
-    int i, c;
+    int i, c, next;
 
     while ((s[0] = c = getch()) == ' ' || c == '\t')
         ;
@@ -174,9 +174,14 @@ int getop(char s[])
         return c;
 
     i = 0;
-    if (c == '-')
-        while (isdigit(s[++i] = c = getch()))
-            ;
+    if (c == '-'){
+        next = getch();
+        if (isdigit(next))
+            c = next;
+        else
+            return c;
+        ungetch(c);
+    }
     if (isdigit(c))
         while (isdigit(s[++i] = c = getch()))
             ;
@@ -185,9 +190,9 @@ int getop(char s[])
             ;
 
 
-   s[i] = '\0';
-   if (c != EOF)
-       ungetch(c);
+    s[i] = '\0';
+    if (c != EOF)
+        ungetch(c);
     return NUMBER;
 }
 

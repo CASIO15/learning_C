@@ -1,7 +1,3 @@
-/*
-    Polish calculator (1-2) * (4 + 5) == 1 2 - 4 5 + *
-*/ 
-
 #include <stdio.h>
 #include <ctype.h>
 #include <math.h>
@@ -20,10 +16,10 @@ int bufp = 0;
 int getop(char []);
 void push(double);
 double pop(void);
-
 double atof_(char s[]);
 int getch(void);
 void ungetch(int c);
+
 void view_top(int sp_pos);
 void duplicate(int sp_pos);
 void swap();
@@ -34,11 +30,24 @@ int main(void)
     int type;
     double op2;
     char s[MAXOP];
+    printf("To use |pow| write ^ after the number\nto use the |sin| function use ~ after the number\nto use |exp| write e after the number\n");
 
     while ((type = getop(s)) != EOF) {
         switch (type) {
             case NUMBER:
                 push(atof_(s));
+                break;
+            case '^':
+                op2 = pop();
+                push(pow(op2, 2));
+                break;
+            case '~':
+                op2 = pop();
+                push(sin(op2));
+                break;
+            case 'e':
+                op2 = pop();
+                push(exp(op2));
                 break;
             case '+':
                 push(pop() + pop());
@@ -148,9 +157,8 @@ void push(double f)
 {
     if (sp < MAXVAL)
         val[sp++] = f;
-    else {
+    else
         printf("Error: full stack, can\'t push %g\n", f);
-    }
 }
 
 double pop(void)
@@ -169,6 +177,7 @@ int getop(char s[])
 
     while ((s[0] = c = getch()) == ' ' || c == '\t')
         ;
+
     s[1] = '\0';
     if (!isdigit(c) && c != '.' && c != '-')
         return c;

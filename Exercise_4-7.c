@@ -40,7 +40,6 @@ int getch(void)
 
 void ungetch(int c)
 {
-    printf("%d\n", buff_pos);
     if (buff_pos >= MAXSIZE)
         printf("ungetch: too many characters\n");
     else

@@ -189,7 +189,7 @@ int getop(char s[]) {
     while ((s[0] = c = getch()) == ' ' || c == '\t');
 
     s[1] = '\0';
-    if (c >= 'A' && c <= 'Z' && c == '=') {
+    if (c == '=') {
         return CREATEARR;
     } else if (c >= 'A' && c <= 'Z'){
         return GETVAR;

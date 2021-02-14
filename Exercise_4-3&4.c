@@ -6,10 +6,11 @@
 #define NUMBER '0'
 #define MAXVAL 100
 #define BUFSIZE 100
+#define CREATEARR '='
 #define GETVAR '1'
 
 
-int var = 0;
+
 int sp = 0;
 double val[MAXVAL];
 char buf[BUFSIZE];
@@ -30,7 +31,7 @@ void swap();
 
 int main(void)
 {
-    int type;
+    int type, var, var_arr[MAXVAL];
     double op2;
     char s[MAXOP];
     printf("To use |pow| write ^ after  the number\nto use the |sin| function use ~ after the number\nto use |exp| write e after the number\n");
@@ -40,19 +41,23 @@ int main(void)
             case NUMBER:
                 push(atof_(s));
                 break;
+            case CREATEARR:
+                var = getch();
+                var_arr[(var-'0')-16] = (int) pop();
+                printf("Creating new var %c=%d\n", var, var_arr[(var-'0')-16]);
+                break;
+            case GETVAR:
+                push(var_arr[(var-'0')-16]);
+                break;
             case '^':
                 op2 = pop();
                 push(pow(op2, 2));
-                break;
-            case GETVAR: // when getop encounters a char, it delegates it returns GETVAR and we catch it in the switch statement, then it pushes the char value to the
-                        // stack, now we can use letters as variables
-                push((var-'0')-49);
                 break;
             case '~':
                 op2 = pop();
                 push(sin(op2));
                 break;
-            case 'E':
+            case 'e':
                 op2 = pop();
                 push(exp(op2));
                 break;
@@ -80,16 +85,16 @@ int main(void)
             case '\n':
                 printf("\t%.8g\n", pop());
                 break;
-            case 'T': // view the top of the stack
+            case 't': // view the top of the stack
                 view_top(sp);
                 break;
-            case 'D': // duplicate desired element in stack
+            case 'd': // duplicate desired element in stack
                 duplicate(sp);
                 break;
-            case 'S': // swap the top two elements
+            case 's': // swap the top two elements
                 swap();
                 break;
-            case 'C':
+            case 'c':
                 while (sp > 0) // clearing the stack by popping all the items, until stack position is 0
                     pop();
                 break;
@@ -179,15 +184,17 @@ double pop(void)
 }
 
 int getop(char s[]) {
-    int i, c, next;
+    int i, c, next, arr[MAXVAL];
 
     while ((s[0] = c = getch()) == ' ' || c == '\t');
 
     s[1] = '\0';
-    if (isalpha(c) && islower(c)) {
-        var = c;
+    if (c >= 'A' && c <= 'Z' && c == '=') {
+        return CREATEARR;
+    } else if (c >= 'A' && c <= 'Z'){
         return GETVAR;
     }
+
     if (!isdigit(c) && c != '.' && c != '-')
         return c;
 

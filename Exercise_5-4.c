@@ -12,7 +12,7 @@ int strend(char *s, char *t)
     if (*s == *t)
         return 1;
     else
-        return -1;
+        return 0;
 }
 
 int main()

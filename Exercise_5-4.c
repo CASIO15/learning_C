@@ -19,7 +19,7 @@ int strend_1(char *s, char *t)
             break;
     }
     
-    // iterating backwards and checking equality of each char.
+    // iterating backwards and checking the equality of each char.
     while(*--s == *--t)
         // updating counter
         counter++;

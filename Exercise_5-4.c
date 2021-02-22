@@ -8,22 +8,23 @@ int strend_1(char *s, char *t)
 {
     int counter = 0;
     unsigned int t_length = strlen(t);
-
-    // iterating over s until '\0'
-    while (*s++)
-        if (*s == '\0')
+    
+    // iterating over s and t, until they are both points to \0
+    while (*s++ && *t++) {
+        if (*s == '\0' && *t != '\0')
+            s--;
+        else if (*t == '\0' && *s != '\0')
+            t--;
+        else if (!*s && !*t)
             break;
-
-    // iterating over t until '\0'
-    while (*t++)
-        if (*t == '\0')
-            break;
-
-    // iterating backwards, checking equality of each char
+    }
+    
+    // iterating backwards and checking equality of each char.
     while(*--s == *--t)
-        counter++; // updating counter
-
-    // if the counter is equal to the length of the t string, return 1
+        // updating counter
+        counter++;
+    
+    // if the counter is equal to the length of t, return 1
     if (counter == t_length)
         return 1;
     else
@@ -32,7 +33,7 @@ int strend_1(char *s, char *t)
 
 int main()
 {
-    char s[] = "hello world", t[] = "ld";
+    char s[] = "hello world", t[] = "world";
 
     printf("%d\n", strend_1(s, t));
     return 0;

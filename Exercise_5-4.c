@@ -9,7 +9,7 @@ int strend_1(char *s, char *t)
     int counter = 0;
     unsigned int t_length = strlen(t);
     
-    // iterating over s and t, until they are both points to \0
+    // iterating over s and t, until they both points to \0
     while (*s++ && *t++) {
         if (*s == '\0' && *t != '\0')
             s--;

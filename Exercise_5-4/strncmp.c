@@ -8,7 +8,7 @@ int strncmp(char *s, char *t, int n)
     while (*s++ && *t++ && (--n > 0)) {
         if (*s == *t)
             continue;
-        if (*s != *t)
+        else
             return *s - *t;
     }
 

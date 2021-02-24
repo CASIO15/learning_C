@@ -23,7 +23,7 @@ void reverse(char *s)
 
 int main(void)
 {
-    char name[100] = "Tomer";
+    char name[100] = "Hello";
     reverse(name);
 
     printf("%s\n", name);

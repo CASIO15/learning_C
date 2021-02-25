@@ -6,7 +6,7 @@ static char daytab[2][13] = {
 };
 
 int day_of_year(int year, int month, int day);
-int month_day(int year, int yearday, int *pmonth, int *pday);
+void month_day(int year, int yearday, int *pmonth, int *pday);
 
 
 int day_of_year(int year, int month, int day)
@@ -24,7 +24,7 @@ int day_of_year(int year, int month, int day)
     return day;
 }
 
-int month_day(int year, int yearday, int *pmonth, int *pday)
+void month_day(int year, int yearday, int *pmonth, int *pday)
 {
     int i, leap;
     leap = year%4 == 0 && year%100 != 0 || year % 400 == 0;

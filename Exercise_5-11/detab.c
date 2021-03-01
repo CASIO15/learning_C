@@ -45,7 +45,7 @@ void detab(char *s, char *newArr, int pad)
 {
     int i, tabindex;
 
-    for (i=0; *s != '\n'; s++, i++) {
+    for (i=0; *s != '\0'; s++, i++) {
         tabindex = pad - ((i - 1) % pad);
         if (ISTAB(*s))
             while((tabindex--) > 0) {

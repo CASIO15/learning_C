@@ -54,8 +54,6 @@ void detab(char *s, char *newArr, int pad)
         else
             *newArr++ = *s;
     }
-    if (*s == '\n')
-        *newArr++ = *s;
 
     *newArr= '\0';
 }

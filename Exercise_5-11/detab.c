@@ -14,8 +14,8 @@ int main(int argc, char *argv[])
 
     while(my_getline(s, MAXLINE) > 0) {
         if (argc > 1) {
-            while (--argc > 0 && *++argv) {
-                detab(s, new, atoi(*argv));
+            while (--argc > 0) {
+                detab(s, new, atoi(*++argv));
             }
         }
         else
@@ -49,7 +49,7 @@ void detab(char *s, char *newArr, int pad)
         tabindex = pad - ((i - 1) % pad);
         if (ISTAB(*s))
             while((tabindex--) > 0) {
-                *newArr++ = '-';
+                *newArr++ = ' ';
             }
         else
             *newArr++ = *s;

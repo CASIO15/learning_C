@@ -64,10 +64,12 @@ void entab(char *s, char *newArr, int pad, int step)
     int i, tabindex;
 
     i=0;
+    // copying s to newArr, until we reach the starting position
     while (i++ < pad) {
         *newArr++ = *s++;
     }
-
+    
+    // using the step to calculate the next tab stop.
     for (i=1; *s != '\0'; i++) {
         tabindex = step - ((i - 1) % step);
         if ((int) *s == ' ' && (tabindex % pad == 0)) {

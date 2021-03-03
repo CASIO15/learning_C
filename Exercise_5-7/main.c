@@ -1,6 +1,6 @@
 #include "stdio.h"
 #include "string.h"
-#include "qsort.h"
+#include "sort.h"
 
 #define MAXLINES 10
 
@@ -15,7 +15,6 @@ int main()
 
     if ((nlines=readlines(lineptr, MAXLINES)) >= 0) {
         qsort(lineptr, 0, nlines-1);
-        putchar('\n');
         writelines(lineptr, nlines);
         return 0;
     } else {
@@ -49,7 +48,7 @@ int readlines(char *lineptr[], int maxlines)
     static int nlines = 0;
 
     while ((len=getlines(line, MAXLEN)) > 0)
-        if (nlines >= maxlines || (p=(*lineptr + nlines)) == NULL)
+        if (nlines >= maxlines || (p += nlines) == NULL)
             return -1;
         else {
             line[len-1] = '\0'; // deleting new line

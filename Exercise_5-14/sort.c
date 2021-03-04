@@ -12,9 +12,9 @@ void my_qsort(void *lineptr[], int left, int right, int (*comp) (void *, void *)
     last = left;
 
     for(i=left+1; i <= right; i++) {
-        if (reverse && (*comp)(lineptr[i], lineptr[left]) < 0) // if sort flag is on (1), sort in decreasing order
+        if (reverse && (*comp)(lineptr[i], lineptr[left]) > 0) // if sort flag is on (1), sort in decreasing order
             swap(lineptr, ++last, i);
-        if (!reverse && (*comp)(lineptr[i], lineptr[left]) > 0) // if sort flag is off (0), sort in ascending order
+        if (!reverse && (*comp)(lineptr[i], lineptr[left]) < 0) // if sort flag is off (0), sort in ascending order
             swap(lineptr, ++last, i);
     }
     swap(lineptr, left, last);

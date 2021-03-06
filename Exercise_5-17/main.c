@@ -106,7 +106,7 @@ void writelines(char *lineptr[], int nlines)
         printf("%s\n", *lineptr++);
 }
 
-// Sorting by fields, in order for it to work you will need to use '\t' [it picks the desired field by the number of tabs specified]
+// Sorting by fields, in order for it to work you will need to use '\t' as spacer between each coloumn.
 
 int numcmp(char *s1, char *s2)
 {

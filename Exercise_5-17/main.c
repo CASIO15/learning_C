@@ -118,13 +118,13 @@ int numcmp(char *s1, char *s2)
         if (*s1++ == '\t')
             cp_skip_d1--;
 
-    value1 = (double) s1[0];
+    value1 = atof(s1);
 
     while (cp_skip_d2 > 0)
         if (*s2++ == '\t')
             cp_skip_d2--;
 
-    value2 = (double) s2[0];
+    value2 = atof(s2);
 
     if (value1 < value2)
         return -1;

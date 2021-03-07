@@ -30,10 +30,10 @@ int main()
             if (type == PARENS || type == BRACKETS) {
                 strcat(out, token);
             } else if (type == '*') {
-                if (strcmp(token, "()") > 0)
-                   sprintf(temp, "*%s", out);
+                if (strcmp(token, "()") > 0) // if the token is not a pair of (), we dont need to extra parenthesis around it.
+                    sprintf(temp, "*%s", out);
                 else
-                    sprintf(temp, "(*%s)", out);
+                    sprintf(temp, "(*%s)", out); // if the token is (), then we need to add extra () around the whole declaration
                 strcpy(out, temp);
             } else if (type == NAME) {
                 sprintf(temp, "%s %s", token, out);

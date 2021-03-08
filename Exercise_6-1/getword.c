@@ -44,7 +44,7 @@ int main()
     int n;
     char word[MAXWORD], name[] = "hello";
     // comment here
-    /* nested */
+    /* multi line */
     while (getword(word, MAXWORD) != EOF)
         if (isascii(word[0]))
             if ((n = binsearch(word, keytab, NKEYS)) >= 0 || (n=binsearch(new, keytab, NKEYS)) >= 0)

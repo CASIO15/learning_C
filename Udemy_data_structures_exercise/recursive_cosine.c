@@ -1,7 +1,7 @@
 #include "stdio.h"
 
 /*
-    cosine serien = 1 - xˆ2/2! + xˆ4/4! - xˆ6/6! ...
+    cosine series = 1 - xˆ2/2! + xˆ4/4! - xˆ6/6! ...
 */
 
 double cosine_series(int n, int count);

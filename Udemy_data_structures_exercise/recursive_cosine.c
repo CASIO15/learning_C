@@ -15,7 +15,7 @@ double cosine_series(int n, int count)
         return 1.0;
 
     else {
-        r = cos_series(n, count-2); // head recursion, so all calculation are done at return time.
+        r = cosine_series(n, count-2); // head recursion, so all calculation are done at return time.
         pow *= (n*n); // calculating power of n
         fact *= (count * (count-1)); // calculating factorial 
         sign *= -1.0;
@@ -26,7 +26,7 @@ double cosine_series(int n, int count)
 
 int main()
 {
-    printf("%lf\n", cos_series(4,8));
+    printf("%lf\n", cosine_series(4,8));
     return 0;
 }
 

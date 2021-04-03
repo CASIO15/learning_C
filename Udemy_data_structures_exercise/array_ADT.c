@@ -31,12 +31,49 @@ void insert_sorted(struct Array *, int);
 char *is_sorted(struct Array *, int, int);
 void exchange_pos_neg(struct Array *);
 struct Array *merge(struct Array *arr, struct Array *arr2);
+struct Array *my_union(struct Array *arr, struct Array *arr2);
+
+struct Array *my_union(struct Array *arr, struct Array *arr2)
+{
+    struct Array *arr3 = (struct Array *) malloc(sizeof(struct Array));
+    int i, j, k, flag=0, counter=0, pos=0;
+
+    arr3->size = arr->size + arr2->size;
+    arr3->length = arr->length + arr2->length;
+    arr3->A = (int*) malloc(sizeof(int) * arr3->length);
+
+    for (i=0, k=0; i < arr->length; i++, k++)
+        arr3->A[k] = arr->A[i];
+
+    for (i=0, j=0; j < arr2->length; ) {
+        if (arr2->A[j] == arr->A[i])
+            counter++;
+
+        if (flag) {
+            flag = 0;
+            j++;
+            i = 0;
+        } else {
+            i++;
+            if (i == arr->length) {
+                flag = 1;
+                if (counter == 0) {
+                    arr3->A[k++] = arr2->A[j];
+                    printf("%d\n", arr2->A[j]);
+                }
+                counter = 0;
+            }
+        }
+    }
+    arr3->length = k;
+    return arr3;
+}
 
 struct Array *merge(struct Array *arr, struct Array *arr2)
 {
     struct Array *new = (struct Array *) malloc(sizeof(struct Array));
     int i,j,k;
-    
+
     new->size = arr->size + arr2->size;
     new->length = arr->length + arr2->length;
     new->A = (int*) malloc(sizeof(int) * new->length);
@@ -54,7 +91,6 @@ struct Array *merge(struct Array *arr, struct Array *arr2)
     for (; j < arr2->length; j++)
         new->A[k++] = arr2->A[j];
 
-    new->A[++k] = '\0';
     return new;
 }
 
@@ -310,7 +346,7 @@ int main ()
     for (i=0; i < n; i++)
         scanf("%d", &arr.A[i]);
 
-    arr.length = n;
+    arr.length = i;
     //display(arr);
     //printf("\n10 is at index %d\n", bin_search(arr, 0, arr.size, 10));
     //printf("\n10 is at index %d\n", linear_search(&arr, 10));
@@ -327,7 +363,7 @@ int main ()
     //right_rotate(&arr, 3);
     //insert_sorted(&arr, 18);
     //exchange_pos_neg(&arr);
-    display(*merge(&arr, &arr2));
+    display(*my_union(&arr, &arr2));
     //printf("\n%s\n", is_sorted(&arr, 0, 1));
     free(arr.A);
     return 0;

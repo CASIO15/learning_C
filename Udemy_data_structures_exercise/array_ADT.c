@@ -42,9 +42,18 @@ struct Array *my_union(struct Array *arr, struct Array *arr2)
     arr3->length = arr->length + arr2->length;
     arr3->A = (int*) malloc(sizeof(int) * arr3->length);
 
+    // Copying the first array to arr3
     for (i=0, k=0; i < arr->length; i++, k++)
         arr3->A[k] = arr->A[i];
 
+    /* Iterating across arr2.
+     * Each iteration we compare each element in arr && arr2
+     * if the elements are equal, we increment counter by 1.
+     * When we reach the end of --arr-- we set the flag to 1,
+     * if the counter is 0, we add the element from arr2 to arr3
+     * else we set counter to 0, and continue the iteration.
+     */
+    
     for (i=0, j=0; j < arr2->length; ) {
         if (arr2->A[j] == arr->A[i])
             counter++;
@@ -57,10 +66,8 @@ struct Array *my_union(struct Array *arr, struct Array *arr2)
             i++;
             if (i == arr->length) {
                 flag = 1;
-                if (counter == 0) {
+                if (counter == 0)
                     arr3->A[k++] = arr2->A[j];
-                    printf("%d\n", arr2->A[j]);
-                }
                 counter = 0;
             }
         }

@@ -53,15 +53,15 @@ struct Array *my_union(struct Array *arr, struct Array *arr2)
      * if the counter is 0, we add the element from arr2 to arr3
      * else we set counter to 0, and continue the iteration.
      */
-    
+
     for (i=0, j=0; j < arr2->length; ) {
         if (arr2->A[j] == arr->A[i])
             counter++;
 
         if (flag) {
             flag = 0;
-            j++;
             i = 0;
+            j++;
         } else {
             i++;
             if (i == arr->length) {

@@ -36,7 +36,7 @@ struct Array *my_union(struct Array *arr, struct Array *arr2);
 struct Array *my_union(struct Array *arr, struct Array *arr2)
 {
     struct Array *arr3 = (struct Array *) malloc(sizeof(struct Array));
-    int i, j, k, flag=0, counter=0, pos=0;
+    int i, j, k, flag=0, counter=0;
 
     arr3->size = arr->size + arr2->size;
     arr3->length = arr->length + arr2->length;

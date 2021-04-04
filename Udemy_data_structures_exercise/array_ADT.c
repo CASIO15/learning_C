@@ -68,7 +68,7 @@ struct Array *difference(struct Array *arr, struct Array *arr2)
             }
         }
     }
-    arr3->length =  (arr->length == size) ? k-1 : k;
+    arr3->length =  k;
     return arr3;
 }
 
@@ -319,8 +319,7 @@ void swap(int *s, int *t)
 void display(struct Array arr)
 {
     int i;
-    printf("-----------------\n");
-    printf("The elements are:\n");
+    printf("\nThe elements are:\n");
     printf("-----------------\n");
 
     for (i = 0; i < arr.length; arr.A++, i++)
@@ -427,8 +426,8 @@ int main ()
     //right_rotate(&arr, 3);
     //insert_sorted(&arr, 18);
     //exchange_pos_neg(&arr);
-    //display(*Union(&arr, &arr2));
-   // display(*Intersection(&arr, &arr2));
+    display(*Union(&arr, &arr2));
+    display(*Intersection(&arr, &arr2));
     display(*difference(&arr, &arr2));
     display(*difference(&arr2, &arr));
     //printf("\n%s\n", is_sorted(&arr, 0, 1));

@@ -46,35 +46,6 @@ struct Array *Array_alloc(struct Array *arr, struct Array *arr2)
     return arr3;
 }
 
-struct Array *difference(struct Array *arr, struct Array *arr2)
-{
-    struct Array *arr3 = Array_alloc(arr, arr2);
-    int i, j, k, flag=0, counter=0,size=(arr->length < arr2->length) ? arr->length : arr2->length;
-
-    for (i=0, j=0, k=0; i < size; ) {
-        if (arr->A[i] == arr2->A[j])
-            counter++;
-        if (flag) {
-            flag = 0;
-            j = 0;
-            i++;
-        } else {
-            j++;
-            if (j == size) {
-                flag = 1;
-                if (counter == 0)
-                    arr3->A[k++] = arr->A[i];
-                counter = 0;
-            }
-        }
-    }
-    while (i < arr->length-1)
-        arr3->A[k++] = arr->A[i++];
-
-    arr3->length = k;
-    return arr3;
-}
-
 struct Array *Intersection(struct Array *arr, struct Array *arr2)
 {
     struct Array *arr3 = Array_alloc(arr, arr2);
@@ -432,8 +403,6 @@ int main ()
     //exchange_pos_neg(&arr);
     //display(*Union(&arr, &arr2));
    // display(*Intersection(&arr, &arr2));
-    display(*difference(&arr, &arr2));
-    display(*difference(&arr2, &arr));
     //printf("\n%s\n", is_sorted(&arr, 0, 1));
     free(arr.A);
     return 0;

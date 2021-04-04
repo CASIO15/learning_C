@@ -56,7 +56,6 @@ struct Array *Intersection(struct Array *arr, struct Array *arr2)
             flag = 1;
             arr3->A[k++] = arr->A[i];
         }
-
         if (flag) {
             flag = 0;
             i++;
@@ -91,7 +90,6 @@ struct Array *Union(struct Array *arr, struct Array *arr2)
     for (i=0, j=0; j < arr2->length; ) {
         if (arr2->A[j] == arr->A[i])
             counter++;
-
         if (flag) {
             flag = 0;
             i = 0;
@@ -240,7 +238,7 @@ void reverse(struct Array *arr)
 
 float avg(struct Array *arr)
 {
-    return ((float) sum(arr)) / arr->length;
+    return ((float) sum(arr)) /  arr->length;
 }
 
 int sum(struct Array *arr)
@@ -327,8 +325,8 @@ int linear_search(struct Array *arr, int item)
         if (arr->A[i] == item) {
             /* Improving linear search */
 
-            //swap(&arr->A[i], &arr->A[i-1]);
-            swap(&arr->A[i], &arr->A[0]);
+            //swap(&arr->A[i], &arr->A[i-1]); // each search for the same item, brings the item closer the beginning of the array.
+            swap(&arr->A[i], &arr->A[0]); // swapping between the first element and the element we searched for.
             return 0;
         }
     return -1;

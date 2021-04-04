@@ -34,9 +34,9 @@ struct Array *merge(struct Array *arr, struct Array *arr2);
 struct Array *Union(struct Array *arr, struct Array *arr2);
 struct Array *Intersection(struct Array *arr, struct Array *arr2);
 struct Array *difference(struct Array *arr, struct Array *arr2);
-struct Array *create_new(struct Array *arr, struct Array *arr2);
+struct Array *Array_alloc(struct Array *arr, struct Array *arr2);
 
-struct Array *create_new(struct Array *arr, struct Array *arr2)
+struct Array *Array_alloc(struct Array *arr, struct Array *arr2)
 {
     /* Utility function to that return a pointer to Array struct, it reduces DRY code. */
     struct Array *arr3 = (struct Array *) malloc(sizeof(struct Array));
@@ -48,7 +48,7 @@ struct Array *create_new(struct Array *arr, struct Array *arr2)
 
 struct Array *difference(struct Array *arr, struct Array *arr2)
 {
-    struct Array *arr3 = create_new(arr, arr2);
+    struct Array *arr3 = Array_alloc(arr, arr2);
     int i, j, k, flag=0, counter=0,size=(arr->length < arr2->length) ? arr->length : arr2->length;
 
     for (i=0, j=0, k=0; i < size; ) {
@@ -77,7 +77,7 @@ struct Array *difference(struct Array *arr, struct Array *arr2)
 
 struct Array *Intersection(struct Array *arr, struct Array *arr2)
 {
-    struct Array *arr3 = create_new(arr, arr2);
+    struct Array *arr3 = Array_alloc(arr, arr2);
     int i, j, k, flag=0, size=(arr->length < arr2->length) ? arr->length : arr2->length;
 
     for (i=0, j=0, k=0; i < size;) {
@@ -101,8 +101,8 @@ struct Array *Intersection(struct Array *arr, struct Array *arr2)
 
 struct Array *Union(struct Array *arr, struct Array *arr2)
 {
-    struct Array *arr3 = create_new(arr, arr2);
-    int i, j, k, flag=0, counter=0, pos=0;
+    struct Array *arr3 = Array_alloc(arr, arr2);
+    int i, j, k, flag=0, counter=0;
 
     // Copying the first array to arr3
     for (i=0, k=0; i < arr->length; i++, k++)
@@ -389,7 +389,6 @@ void insert(struct Array *arr, int index, int n)
     arr->A[i] = n;
     arr->length++;
 }
-
 
 int main ()
 {

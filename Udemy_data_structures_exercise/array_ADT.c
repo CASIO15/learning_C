@@ -38,7 +38,7 @@ struct Array *Array_alloc(struct Array *arr, struct Array *arr2);
 
 struct Array *Array_alloc(struct Array *arr, struct Array *arr2)
 {
-    /* Utility function to that return a pointer to Array struct, it reduces DRY code. */
+    /* Utility function that return a pointer to Array struct, it reduces DRY code. */
     struct Array *arr3 = (struct Array *) malloc(sizeof(struct Array));
     arr3->size = arr->size + arr2->size;
     arr3->A = (int*) malloc(sizeof(int) * arr3->size);

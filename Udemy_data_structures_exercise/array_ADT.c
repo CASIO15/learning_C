@@ -31,16 +31,50 @@ void insert_sorted(struct Array *, int);
 char *is_sorted(struct Array *, int, int);
 void exchange_pos_neg(struct Array *);
 struct Array *merge(struct Array *arr, struct Array *arr2);
-struct Array *my_union(struct Array *arr, struct Array *arr2);
+struct Array *Union(struct Array *arr, struct Array *arr2);
+struct Array *Intersection(struct Array *arr, struct Array *arr2);
+struct Array *create_new(struct Array *arr, struct Array *arr2);
 
-struct Array *my_union(struct Array *arr, struct Array *arr2)
+struct Array *create_new(struct Array *arr, struct Array *arr2)
 {
+    /* Utility function to that return a pointer to Array struct, it reduces DRY code. */
     struct Array *arr3 = (struct Array *) malloc(sizeof(struct Array));
-    int i, j, k, flag=0, counter=0;
-
     arr3->size = arr->size + arr2->size;
     arr3->length = arr->length + arr2->length;
     arr3->A = (int*) malloc(sizeof(int) * arr3->length);
+
+    return arr3;
+}
+
+struct Array *Intersection(struct Array *arr, struct Array *arr2)
+{
+    struct Array *arr3 = create_new(arr, arr2);
+    int i, j, k, flag=0, size=(arr->length > arr2->length) ? arr->length : arr2->length;
+
+    for (i=0, j=0, k=0; i < size;) {
+        if (arr->A[i] == arr2->A[j]) {
+            flag = 1;
+            arr3->A[k++] = arr->A[i];
+        }
+
+        if (flag) {
+            flag = 0;
+            i++;
+            j = 0;
+        } else {
+            j++;
+            if (j == size)
+                flag = 1;
+        }
+    }
+    arr3->length = k;
+    return arr3;
+}
+
+struct Array *Union(struct Array *arr, struct Array *arr2)
+{
+    struct Array *arr3 = create_new(arr, arr2);
+    int i, j, k, flag=0, counter=0, pos=0;
 
     // Copying the first array to arr3
     for (i=0, k=0; i < arr->length; i++, k++)
@@ -336,7 +370,7 @@ int main ()
     struct Array arr;
     struct Array arr2;
 
-    arr2.length = arr2.size = 10;
+    arr2.length = arr2.size = 11;
     arr2.A = (int*) malloc(sizeof(int) * arr2.length);
     arr2.A = new_arr;
 
@@ -370,7 +404,8 @@ int main ()
     //right_rotate(&arr, 3);
     //insert_sorted(&arr, 18);
     //exchange_pos_neg(&arr);
-    display(*my_union(&arr, &arr2));
+    display(*Union(&arr, &arr2));
+    display(*Intersection(&arr, &arr2));
     //printf("\n%s\n", is_sorted(&arr, 0, 1));
     free(arr.A);
     return 0;

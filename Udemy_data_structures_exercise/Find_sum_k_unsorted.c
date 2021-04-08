@@ -29,12 +29,15 @@ int find_max(const int *arr, int len)
 
 void find_sum_k_hash(int *arr, int k, int length)
 {
-    int i, len=find_max(arr, length)+1;
+    int i, len=find_max(arr, length)+1; // Finding the max element (using it for the length of the HashTable array).
     int HashTable[len];
 
+    // Initializing all the elements inside HashTable to zero
     for (i=0; i <= len; i++)
         HashTable[i] = 0;
 
+    // Iterating over the HashTable, if HashTable[k-arr[i]] != 0 (it means that the corresponding element to complete the sum
+    // is also inside arr, therefore we print it).
     for (i=0; i <= length; i++) {
        if (HashTable[k - arr[i]] != 0 && arr[i] <= k)
            printf("%d + %d = %d\n", arr[i], k-arr[i], k);
@@ -55,13 +58,13 @@ int main()
 }
 
 /*
-  Result: 
-  
+  Result:
+
   *  3 + 7 = 10
   *  8 + 2 = 10
   *  10 + 0 = 10
   *  5 + 5 = 10
-    
+
   * 7 + 3 = 10
   *  2 + 8 = 10
   *  5 + 5 = 10

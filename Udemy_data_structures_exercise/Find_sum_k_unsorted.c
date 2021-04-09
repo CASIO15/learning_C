@@ -39,7 +39,7 @@ void find_sum_k_hash(int *arr, int k, int length)
     // Iterating over the HashTable, if HashTable[k-arr[i]] != 0 (it means that the corresponding element to complete the sum
     // is also inside arr, therefore we print it).
     for (i=0; i <= length; i++) {
-       if (HashTable[k - arr[i]] != 0 && arr[i] <= k)
+       if ((HashTable[k - arr[i]] >= 1 && HashTable[k-arr[i]] <= length) && arr[i] <= k)
            printf("%d + %d = %d\n", arr[i], k-arr[i], k);
        HashTable[arr[i]]++;
     }

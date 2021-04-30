@@ -4,7 +4,7 @@
 
 int len(char *A);
 char *split(char *A);
-void reverse(char *A, char **s);
+void reverse(char *A);
 
 int len(char *A)
 {
@@ -39,11 +39,15 @@ char *split(char *A)
     }
 }
 
-void reverse(char *A, char **s)
+void reverse(char *A)
 {
     int i, n, j=len(A)-1;
-    *A = '\0';
+    char *s[j+1];
 
+    for (i=0; i < len(A); i++)
+        s[i] = split(A);
+
+    *A = '\0';
     i=0;
     n=0;
     while (j >= 0) {
@@ -59,12 +63,9 @@ void reverse(char *A, char **s)
 
 int main(void)
 {
-    char string[] = "Process finished with exit code 0", *s[len(string)];
+    char string[] = "Process finished with exit code 0";
 
-    for (int i=0; i < len(string); i++)
-        s[i] = split(string);
-
-    reverse(string, s);
+    reverse(string);
     printf("%s\n", string); // 0 code  exit  with  finished  Process
 
     return 0;

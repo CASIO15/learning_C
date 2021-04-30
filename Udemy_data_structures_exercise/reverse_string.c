@@ -3,40 +3,35 @@
 #include "string.h"
 
 int len(char *A);
-char *split(char *A);
+char *split(const char *A);
 void reverse(char *A);
 
 int len(char *A)
 {
     int cnt=0;
 
-    while (*A) {
+    while (*A++)
         if (*A == ' ')
-            A++, cnt++;
-        else
-            A++;
-    }
+            cnt++;
     return cnt+1;
 }
 
-char *split(char *A)
+char *split(const char *A)
 {
-    static int  i=0, j=0, n=0, cnt=0;
-    int length=len(A);
-    char *temp=(char *)malloc(sizeof(char)*100), *res;
+    static int  i=0;
+    int cnt=0, j=0;
+    char *temp=(char *)malloc(sizeof(char)*100);
 
-    while (A[i] != '\0') {
+    while (A[i]) {
         temp[j++] = A[i++];
-        cnt++;
         if (A[i] == ' ' || A[i] == '\0') {
             temp[j] = A[i++];
-            temp[cnt++] = '\0';
-            res = temp;
-            j=0, cnt=0, n++;
-            return res;
-        } if (n == length)
+            temp[++cnt] = '\0';
             break;
+        }
+        cnt++;
     }
+    return temp;
 }
 
 void reverse(char *A)
@@ -64,8 +59,8 @@ void reverse(char *A)
 int main(void)
 {
     char string[] = "Process finished with exit code 0";
-
     reverse(string);
+
     printf("%s\n", string); // 0 code exit with finished Process
 
     return 0;

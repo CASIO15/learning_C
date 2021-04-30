@@ -36,10 +36,11 @@ char *split(const char *A)
 
 void reverse(char *A)
 {
-    int i, n, j=len(A)-1;
+    int length=len(A);
+    int i, n, j=length-1;
     char *s[j+1];
 
-    for (i=0; i < len(A); i++)
+    for (i=0; i < length; i++)
         s[i] = split(A);
 
     *A = '\0';

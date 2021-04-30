@@ -30,7 +30,7 @@ char *split(char *A)
         cnt++;
         if (A[i] == ' ' || A[i] == '\0') {
             temp[j] = A[i++];
-            temp[++cnt] = '\0';
+            temp[cnt++] = '\0';
             res = temp;
             j=0, cnt=0, n++;
             return res;
@@ -66,7 +66,7 @@ int main(void)
     char string[] = "Process finished with exit code 0";
 
     reverse(string);
-    printf("%s\n", string); // 0 code  exit  with  finished  Process
+    printf("%s\n", string); // 0 code exit with finished Process
 
     return 0;
 }

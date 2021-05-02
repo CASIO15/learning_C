@@ -3,7 +3,7 @@
 #include "string.h"
 
 int len(char *A);
-char *split(const char *A);
+char *split(char *A);
 void reverse(char *A);
 
 int len(char *A)
@@ -16,53 +16,53 @@ int len(char *A)
     return cnt+1;
 }
 
-char *split(const char *A)
+char *split(char *A)
 {
     static int  i=0;
+    if (i > strlen(A))
+        i=0;
     int cnt=0, j=0;
-    char *temp=(char *)malloc(sizeof(char)*100);
+    char *temp=(char *)malloc(sizeof(char)*20);
 
     while (A[i]) {
         temp[j++] = A[i++];
-        if (A[i] == ' ' || A[i] == '\0') {
-            temp[j] = A[i++];
-            temp[++cnt] = '\0';
+        if (A[i] == ' ' || !A[i]) {
+            temp[j] = ' ';
             break;
         }
         cnt++;
     }
+    temp[++cnt] = '\0';
     return temp;
 }
 
 void reverse(char *A)
 {
     int length=len(A);
-    int i, n, j=length-1;
-    char *s[j+1];
+    int i, j=length-1;
+    char *s[length];
 
     for (i=0; i < length; i++)
         s[i] = split(A);
 
     *A = '\0';
-    i=0;
-    n=0;
-    while (j >= 0) {
-        if (strlen(s[j]) > n) {
-            A[i++] = s[j][n++];
-        } else {
-            A[i++] = ' ';
-            j--, n=0;
-        }
-    }
-    A[i] = '\0';
+
+    while (j >= 0)
+        strcat(A, s[--j]);
+
 }
 
 int main(void)
 {
-    char string[] = "Process finished with exit code 0";
+    char string[] = "  hello            world !!!    ";
+    char string2[] = "                               ";
+
     reverse(string);
+    reverse(string2);
 
-    printf("%s\n", string); // 0 code exit with finished Process
+    printf("string: %s\n", string); // string:     !!! world            hello
 
+    printf("string2: %s\n", string2); // string2:
+    
     return 0;
 }

@@ -38,31 +38,32 @@ char *split(char *A)
 
 void reverse(char *A)
 {
-    int length=len(A);
-    int i, j=length-1;
+    size_t length=strlen(A);
+    int i, j=len(A);
     char *s[length];
 
     for (i=0; i < length; i++)
         s[i] = split(A);
 
     *A = '\0';
-
-    while (j >= 0)
+    while (j > 0)
         strcat(A, s[--j]);
-
+    
+    free(s);
 }
 
 int main(void)
 {
     char string[] = "  hello            world !!!    ";
-    char string2[] = "                               ";
+    char string2[] = "                hello world";
+    char string3[] = "                ";
 
     reverse(string);
     reverse(string2);
+    reverse(string3);
 
-    printf("string: %s\n", string); // string:     !!! world            hello
-
-    printf("string2: %s\n", string2); // string2:
-    
+    printf("string: %s\n", string); // string:      !!! world            hello
+    printf("string2: %s\n", string2); // string2:  world hello
+    printf("string3: %s\n", string3); // string3:
     return 0;
 }
